@@ -1,22 +1,17 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0  # (Optional: Specify a version)
-    hooks:  # This is the missing key
-      - id: trailing-whitespace  # Example hook
-      - id: end-of-file-fixer   # Example hook
-      # You can add more hooks here
-- repo: https://github.com/pre-commit/pre-commit-hooks
-rev: v4.4.0
-hooks:
-- id: trailing-whitespace
-- id: end-of-file-fixer
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
 
-- id: check-yaml
-- repo: https://github.com/psf/black
-rev: 23.3.0
-hooks:
-- id: black
-- repo: https://github.com/PyCQA/isort
-rev: 5.12.0
-hooks:
-- id: isort
+  - repo: https://github.com/psf/black
+    rev: 23.3.0
+    hooks:
+      - id: black
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
