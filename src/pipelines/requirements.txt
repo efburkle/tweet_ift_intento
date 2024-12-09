@@ -1,4 +1,4 @@
-kpf
+git+https://github.com/efburkle/tweet_ift_intento.git#egg=kpf
 google-cloud-storage
 google-cloud-aiplatform
 google-cloud-pipeline-components
