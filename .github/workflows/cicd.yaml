@@ -24,7 +24,6 @@ jobs:
       - name: Pre-Commit
         run: |
           pip install pre-commit
-          pre-commit --version
           pre-commit install
           pre-commit run --all-files
 
@@ -43,18 +42,18 @@ jobs:
         run: |
           pip install -r src/pipelines/requirements.txt
           python -B src/pipelines/iris_pipeline.py
-      
+  
       - name: 'GCP Auth'
         uses: 'google-github-actions/auth@v0.4.0'
         with:
           project_id: "intento-c-enlanube"
           workload_identity_provider: "https://iam.googleapis.com/projects/567848119296/locations/global/workloadIdentityPools/aprendegithubintento/providers/githubactionsmlops"
           service_account: "mlops-service-account@intento-c-enlanube.iam.gserviceaccount.com"
-      
+
       - name: Register
         run: |
           curl -X POST \
-          -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-          -F tags=latest \
-          -F content=@pipeline.yaml \
-          https://us-central1-kfp.pkg.dev/intento-c-enlanube/mlops/
+            -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+            -F tags=latest \
+            -F content=@pipeline.yaml \
+            https://us-central1-kfp.pkg.dev/intento-c-enlanube/mlops/
