@@ -47,9 +47,9 @@ jobs:
       - name: 'GCP Auth'
         uses: 'google-github-actions/auth@v0.4.0'
         with:
-          project_id: ${{ vars.PROJECT_ID }}
-          workload_identity_provider: ${{ vars.WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ vars.SERVICE_ACCOUNT }}
+          project_id: "intento-c-enlanube"
+          workload_identity_provider: ¨projects/567848119296/locations/global/workloadIdentityPools/aprendegithubintento/subject/SUBJECT_ATTRIBUTE_VALUE"
+          service_account: "intento-c-enlanube"
       
       - name: Register
         run: |
@@ -57,4 +57,4 @@ jobs:
           -H "Authorization: Bearer $(gcloud auth print-access-token)" \
           -F tags=latest \
           -F content=@pipeline.yaml \
-          ${{ vars.PIPELINE_REPOSITORY }}
+          https://us-central1-kfp.pkg.dev/intento-c-enlanube/mlops
