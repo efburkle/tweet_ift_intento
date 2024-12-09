@@ -48,7 +48,7 @@ jobs:
         uses: 'google-github-actions/auth@v0.4.0'
         with:
           project_id: "intento-c-enlanube"
-          workload_identity_provider: ¨projects/567848119296/locations/global/workloadIdentityPools/aprendegithubintento/subject/SUBJECT_ATTRIBUTE_VALUE"
+          workload_identity_provider: "https://iam.googleapis.com/projects/567848119296/locations/global/workloadIdentityPools/aprendegithubintento/providers/githubactionsmlops"
           service_account: "mlops-service-account@intento-c-enlanube.iam.gserviceaccount.com"
       
       - name: Register
