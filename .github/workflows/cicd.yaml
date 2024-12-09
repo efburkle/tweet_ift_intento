@@ -57,4 +57,4 @@ jobs:
           -H "Authorization: Bearer $(gcloud auth print-access-token)" \
           -F tags=latest \
           -F content=@pipeline.yaml \
-          https://us-central1-kfp.pkg.dev/intento-c-enlanube/mlops
+          https://us-central1-kfp.pkg.dev/intento-c-enlanube/mlops/
