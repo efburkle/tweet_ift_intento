@@ -2,6 +2,7 @@ import re
 import string
 import pandas as pd
 import emoji
+import nltk
 from nltk.corpus import stopwords
 from unidecode import unidecode
 
