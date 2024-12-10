@@ -10,7 +10,7 @@ from libs.cleaning import limpieza_total  # Asegúrate de que esta función est�
 from libs.constants import TELECOM, TWEET, CLEANED, DATA   # Define estas constantes en 'libs/constants.py'
 
 # Configuración de credenciales para Google Cloud
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "intento-c-enlanube-f5a99ccd5ab3.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "libs/intento-c-enlanube-f5a99ccd5ab3.json"
 client = bigquery.Client(project="intento-c-enlanube")
 
 # Funciones para la lectura de datos desde BigQuery
