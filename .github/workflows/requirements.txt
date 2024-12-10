@@ -2,6 +2,7 @@ kfp
 pandas
 scikit-learn
 emoji
+db-dtypes
 unidecode
 nltk
 google-cloud-storage
