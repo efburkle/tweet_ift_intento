@@ -31,7 +31,7 @@ print("Columnas disponibles en tweets:", tweets.columns)
 
 # Suponiendo que la columna con el texto se llama 'text'
 # Si el nombre real es otro, cámbialo aquí
-tweets["CLEANED"] = limpieza_total(tweets["text"])
+tweets["CLEANED"] = limpieza_total(tweets["Tweet"])
 
 def clean_tweets(tweets, min_len=3):
     if 'CLEANED' not in tweets.columns:
