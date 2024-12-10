@@ -5,7 +5,7 @@ import emoji
 from nltk.corpus import stopwords
 from unidecode import unidecode
 
- nltk.download('stopwords')
+nltk.download('stopwords')
 
 rid = [
     "las",
