@@ -1,4 +1,5 @@
 kfp
+pandas
 google-cloud-storage
 google-cloud-aiplatform
 google-cloud-pipeline-components
