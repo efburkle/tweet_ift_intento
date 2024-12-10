@@ -47,7 +47,7 @@ tweets = pd.concat([df_test, df_train], ignore_index=True)
 
 # Limpieza de datos
 def clean_tweets(tweets, min_len=3):
-   tweets["CLEANED"] = tweets["Tweet"].apply(lambda tweet: limpieza_total(tweet)).apply(lemmatize_text)
+    tweets["CLEANED"] = tweets["Tweet"].apply(lambda tweet: limpieza_total(tweet)).apply(lemmatize_text)
     tweets = tweets[tweets["CLEANED"].str.split().apply(len) >= min_len]
     return tweets
 
