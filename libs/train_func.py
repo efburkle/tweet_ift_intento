@@ -12,10 +12,10 @@ import os
 from google.cloud import bigquery
 
 # Establece la ruta del archivo de credenciales
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/ruta/a/tu/archivo/credenciales.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "libs/intento-c-enlanube-8e3f7d6f673a.json"
 
 # Ahora ya puedes crear tu cliente BigQuery
-client = bigquery.Client(project="tu-project-id")
+client = bigquery.Client(project="intento-c-enlanube")
 # Función para leer datos desde BigQuery
 def read_bigquery_table(project_id, dataset_id, table_id):
     """
