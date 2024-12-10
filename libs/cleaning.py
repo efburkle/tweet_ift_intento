@@ -325,27 +325,24 @@ def lista_a_frase(lista):
 
 
 def limpieza_total(serie, del_stopwords=[]):
-    if not isinstance(serie, str):
-        serie = serie.astype(str)
     """
-    Aplica las funciones:
-        1) clean_all
-        2) correccion_lista
-        3) lista_a_frase
-    Las funciones son aplicadas en ese mismo orden
+    Limpia una serie de pandas con comentarios, aplicando una secuencia de funciones:
+    1) clean_all: Limpieza general de texto (remover caracteres especiales, etc.)
+    2) correccion_lista: Corrige la lista de palabras (remover stop words, etc.)
+    3) lista_a_frase: Convierte la lista de palabras en una frase
 
-    Input:
-        +Serie de Pandas con comentarios (string), en este caso no necesita pre
-        procesarse
+    Args:
+        serie (pd.Series): Serie de pandas con comentarios (string).
+        del_stopwords (list, optional): Lista de stop words a eliminar. Defaults to [].
 
-    Output:
-        +Serie de Pandas con los comentarios limpios
+    Returns:
+        pd.Series: Serie de pandas con los comentarios limpios.
     """
 
-    return pd.Series(
-         serie = serie.astype(str)
-        .apply(clean_all)
-        .str.split()
-        .apply(lambda x: correccion_lista(x, del_stopwords=del_stopwords))
-        .apply(lista_a_frase)
-    )
+    def limpiar_texto(texto):
+        texto = clean_all(texto)  # Limpieza general
+        palabras = texto.split()
+        palabras = correccion_lista(palabras, del_stopwords=del_stopwords)
+        return lista_a_frase(palabras)
+
+    return serie.astype(str).apply(limpiar_texto)
