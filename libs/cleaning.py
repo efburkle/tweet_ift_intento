@@ -340,7 +340,7 @@ def limpieza_total(serie:pd.Series, del_stopwords=[]):
         +Serie de Pandas con los comentarios limpios
     """
 
-    return (
+    return pd.Series(
          serie.astype(str)
         .apply(clean_all)
         .str.split()
