@@ -5,9 +5,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import classification_report
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.svm import SVC
-from cleaning import *
-from constants import *
-from preprocess import* 
+from .cleaning import *
+from .constants import *
+from .preprocess import * 
 
 
 # Función para leer datos desde BigQuery
