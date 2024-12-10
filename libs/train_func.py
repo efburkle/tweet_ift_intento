@@ -40,28 +40,29 @@ dataset_id = "datos_entrenamiento"
 df_test = read_bigquery_table(project_id, dataset_id, "test")
 df_train = read_bigquery_table(project_id, dataset_id, "train")
 
-# Concatenar y etiquetar datos
+def clean_tweets(tweets, min_len=3):
+    if 'CLEANED' not in tweets.columns:
+        raise ValueError("'CLEANED' column is missing in the DataFrame.")
+    tweets['CLEANED'] = tweets['CLEANED'].astype(str)
+    tweets = tweets[tweets["CLEANED"].str.split().apply(len) >= min_len]
+    return tweets
+
+# Leer los datos
+project_id = "intento-c-enlanube"
+dataset_id = "datos_entrenamiento"
+df_test = read_bigquery_table(project_id, dataset_id, "test")
+df_train = read_bigquery_table(project_id, dataset_id, "train")
+
 df_test["TELECOM"] = 0
 df_train["TELECOM"] = 1
 tweets = pd.concat([df_test, df_train], ignore_index=True)
 
-# Limpieza de datos
-def clean_tweets(tweets, min_len=3):
-    # Verificar si la columna 'CLEANED' existe en el DataFrame
-    if 'CLEANED' not in tweets.columns:
-        raise ValueError("'CLEANED' column is missing in the DataFrame.")
-    
-    # Asegurarse de que los valores en la columna 'CLEANED' sean cadenas de texto
-    tweets['CLEANED'] = tweets['CLEANED'].astype(str)
-    
-    # Filtrar los tweets cuya longitud de palabras sea mayor o igual a min_len
-    tweets = tweets[tweets["CLEANED"].str.split().apply(len) >= min_len]
+# Crear columna CLEANED
+tweets["CLEANED"] = limpieza_total(tweets["TEXT"])
 
-    print(tweets.columns)  # Esto te mostrará todas las columnas disponibles en el DataFrame
-    
-    return tweets
-
+# Limpiar tweets
 tweets = clean_tweets(tweets)
+
 
 # Separar conjuntos de entrenamiento y prueba
 X_train, X_test, y_train, y_test = train_test_split(
