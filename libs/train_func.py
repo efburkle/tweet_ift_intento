@@ -9,38 +9,14 @@ from .cleaning import *
 from .constants import *
 from .preprocess import * 
 import os
-from google.cloud import bigquery
 
-# Establece la ruta del archivo de credenciales
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "libs/intento-c-enlanube-f5a99ccd5ab3.json"
-
-# Ahora ya puedes crear tu cliente BigQuery
 client = bigquery.Client(project="intento-c-enlanube")
-# Función para leer datos desde BigQuery
+
 def read_bigquery_table(project_id, dataset_id, table_id):
-    """
-    Reads data from a BigQuery table and returns it as a pandas DataFrame.
-
-    Args:
-        project_id (str): Google Cloud project ID.
-        dataset_id (str): BigQuery dataset ID.
-        table_id (str): BigQuery table ID.
-
-    Returns:
-        pandas.DataFrame: DataFrame containing the table data.
-    """
-    client = bigquery.Client(project=project_id)
     query = f"SELECT * FROM `{project_id}.{dataset_id}.{table_id}`"
     return client.query(query).to_dataframe()
 
-
-# Leer datos desde BigQuery
-project_id = "intento-c-enlanube"
-dataset_id = "datos_entrenamiento"
-df_test = read_bigquery_table(project_id, dataset_id, "test")
-df_train = read_bigquery_table(project_id, dataset_id, "train")
-
-# Leer los datos
 project_id = "intento-c-enlanube"
 dataset_id = "datos_entrenamiento"
 df_test = read_bigquery_table(project_id, dataset_id, "test")
@@ -50,11 +26,11 @@ df_test["TELECOM"] = 0
 df_train["TELECOM"] = 1
 tweets = pd.concat([df_test, df_train], ignore_index=True)
 
-# Crear columna CLEANED
-tweets["CLEANED"] = limpieza_total(tweets["TEXT"])
+# Revisa las columnas antes de limpiar
+print(tweets.columns)
 
-# Limpiar tweets
-tweets = clean_tweets(tweets)
+# Suponiendo que la columna se llame 'mensaje' (ajusta según corresponda)
+tweets["CLEANED"] = limpieza_total(tweets["mensaje"])
 
 def clean_tweets(tweets, min_len=3):
     if 'CLEANED' not in tweets.columns:
@@ -63,25 +39,21 @@ def clean_tweets(tweets, min_len=3):
     tweets = tweets[tweets["CLEANED"].str.split().apply(len) >= min_len]
     return tweets
 
-print(tweets.columns)
+tweets = clean_tweets(tweets)
 
-# Separar conjuntos de entrenamiento y prueba
 X_train, X_test, y_train, y_test = train_test_split(
     tweets["CLEANED"], tweets["TELECOM"], test_size=0.2, random_state=42
 )
 
-# Entrenamiento de vectorizador
 vectorizer = TfidfVectorizer(min_df=10)
 X_train_vec = vectorizer.fit_transform(X_train)
 X_test_vec = vectorizer.transform(X_test)
 
-# Entrenamiento de modelo
 model = SVC()
 param_grid = {"C": [0.1, 1, 10], "kernel": ["linear", "rbf"]}
 gs_model = GridSearchCV(model, param_grid, cv=5)
 gs_model.fit(X_train_vec, y_train)
 
-# Evaluación
 print("Mejores parámetros:", gs_model.best_params_)
 y_pred_train = gs_model.predict(X_train_vec)
 y_pred_test = gs_model.predict(X_test_vec)
