@@ -324,7 +324,9 @@ def lista_a_frase(lista):
     return " ".join(lista)
 
 
-def limpieza_total(serie:pd.Series, del_stopwords=[]):
+def limpieza_total(serie, del_stopwords=[]):
+    if not isinstance(serie, str):
+        serie = serie.astype(str)
     """
     Aplica las funciones:
         1) clean_all
@@ -341,7 +343,7 @@ def limpieza_total(serie:pd.Series, del_stopwords=[]):
     """
 
     return pd.Series(
-         serie = serie.astype(str)
+         serie
         .apply(clean_all)
         .str.split()
         .apply(lambda x: correccion_lista(x, del_stopwords=del_stopwords))
