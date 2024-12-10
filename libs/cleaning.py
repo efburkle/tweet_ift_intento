@@ -341,7 +341,7 @@ def limpieza_total(serie:pd.Series, del_stopwords=[]):
     """
 
     return pd.Series(
-         serie.astype(str)
+         serie = serie.astype(str)
         .apply(clean_all)
         .str.split()
         .apply(lambda x: correccion_lista(x, del_stopwords=del_stopwords))
