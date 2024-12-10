@@ -14,7 +14,7 @@ def pipeline(project_id: str, location: str, bq_dataset: str, bq_table: str):
 #    from components.models import decision_tree, random_forest
     from register import upload_model
     from libs.train_func import read_bigquery_table  # Usamos la función correcta para cargar los datos desde BigQuery
-    from libs.train_models import train_ift, train_sentiment  # Funciones para entrenar los modelos de clasificación
+    from code.train_models import train_ift, train_sentiment  # Funciones para entrenar los modelos de clasificación
 
     
     if os.path.isdir(os.path.abspath(os.path.join("code", "train_models"))):
