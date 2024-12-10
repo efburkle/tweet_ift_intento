@@ -341,7 +341,7 @@ def limpieza_total(serie, del_stopwords=[]):
     """
 
     return (
-        serie.astype(str)
+         serie#.astype(str)
         .apply(clean_all)
         .str.split()
         .apply(lambda x: correccion_lista(x, del_stopwords=del_stopwords))
