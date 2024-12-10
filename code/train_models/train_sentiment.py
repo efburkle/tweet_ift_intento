@@ -4,7 +4,7 @@ import sys
 import warnings
 
 from sklearn.svm import SVC
-from .libs.train_func import *
+from ..libs.train_func import *
 
 
 warnings.filterwarnings("ignore")
