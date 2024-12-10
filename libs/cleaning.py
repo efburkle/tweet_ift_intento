@@ -1,6 +1,6 @@
 import re
 import string
-
+import pandas as pd
 import emoji
 from nltk.corpus import stopwords
 from unidecode import unidecode
