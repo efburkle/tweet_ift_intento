@@ -3,7 +3,6 @@ pandas
 scikit-learn
 emoji
 nltk
-pickle
 os
 google-cloud-storage
 google-cloud-aiplatform
