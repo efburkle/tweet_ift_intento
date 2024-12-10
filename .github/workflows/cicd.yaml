@@ -2,7 +2,7 @@ name: CICD
 
 on:
   push:
-    branches: [ branch_carpetas ]
+    branches: [ branch_final ]
 
 permissions:
   contents: read
@@ -41,7 +41,7 @@ jobs:
       - name: Compile
         run: |
           pip install -r .github/workflows/requirements.txt
-          python -B src/pipeline.py 
+          python -B pipeline.py 
   
       - name: 'GCP Auth'
         uses: 'google-github-actions/auth@v0.4.0'
