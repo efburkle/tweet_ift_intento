@@ -1,6 +1,10 @@
 kfp
 pandas
 scikit-learn
+emoji
+nltk
+pickle
+os
 google-cloud-storage
 google-cloud-aiplatform
 google-cloud-pipeline-components
