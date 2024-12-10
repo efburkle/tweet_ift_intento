@@ -4,13 +4,13 @@ import kfp
 
 sys.path.append("src")
 
-PIPELIE_NAME = "The-Iris-Pipeline-v1"
-PIPELINE_ROOT = "gs://mlops-demo-youtube/pipeline_root"
+PIPELIE_NAME = "Sentiment_Telecom_pipeline"
+PIPELINE_ROOT = "gs://tweet_ift_intento/pipeline_root"
 
 
 @kfp.dsl.pipeline(name=PIPELIE_NAME, pipeline_root=PIPELINE_ROOT)
 def pipeline(project_id: str, location: str, bq_dataset: str, bq_table: str):
-    from components.data import load_data
+    from tweet_ift_intento.code.libs import train_func.py
     from components.evaluation import choose_best_model
     from components.models import decision_tree, random_forest
     from components.register import upload_model
