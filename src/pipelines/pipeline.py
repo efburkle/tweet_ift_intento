@@ -1,10 +1,9 @@
 import sys
-
 import kfp
 
-sys.path.append("src")
+sys.path.append("code")
 
-PIPELIE_NAME = "Sentiment_Telecom_pipeline"
+PIPELINE_NAME = "Tweet-Analysis-Pipeline-v1"
 PIPELINE_ROOT = "gs://tweet_ift_intento/pipeline_root"
 
 
@@ -15,13 +14,6 @@ def pipeline(project_id: str, location: str, bq_dataset: str, bq_table: str):
 #    from components.models import decision_tree, random_forest
     from components.register import upload_model
 
-    if os.path.isdir(os.path.abspath(os.path.join("tweet_ift_intento","code", "libs"))):
-        sys.path.append(os.path.abspath(os.path.join("tweet_ift_intento","code", "libs")))
-        from train_func import *
-    else:
-        raise ModuleNotFoundError(
-            "The 'libs' directory does not exist in the specified path."
-        )
     if os.path.isdir(os.path.abspath(os.path.join("tweet_ift_intento","code", "train_models"))):
         sys.path.append(os.path.abspath(os.path.join("tweet_ift_intento","code", "train_models")))
         from train_ift import *
@@ -31,24 +23,30 @@ def pipeline(project_id: str, location: str, bq_dataset: str, bq_table: str):
             "The 'libs' directory does not exist in the specified path."
         )
     
-    data_op = load_data(
+    data_op = read_bigquery_table(
         project_id=project_id, bq_dataset=bq_dataset, bq_table=bq_table
     ).set_display_name("Load data from BigQuery")
 
-    dt_op = model_vect_ift(
-        train_dataset=data_op.outputs["train_dataset"]
-    ).set_display_name("Decision Tree")
 
-    rf_op = model_vect_sentiments(
+    ift_model_op = train_ift(
         train_dataset=data_op.outputs["train_dataset"]
-    ).set_display_name("Random Forest")
+    ).set_display_name("Train IFT Model")
+
+    sentiment_model_op = train_sentiment(
+        train_dataset=data_op.outputs["train_dataset"]
+    ).set_display_name("Train Sentiment Model")
     
     upload_model(
         project_id=project_id,
         location=location,
-        model=choose_model_op.outputs["best_model"],
-    ).set_display_name("Register Model")
+        model=ift_model_op.outputs["output_model"],
+    ).set_display_name("Register IFT Model")
 
+    upload_model(
+        project_id=project_id,
+        location=location,
+        model=sentiment_model_op.outputs["output_model"],
+    ).set_display_name("Register Sentiment Model")
 
 if __name__ == "__main__":
     kfp.compiler.Compiler().compile(
