@@ -41,7 +41,7 @@ jobs:
       - name: Compile
         run: |
           pip install -r .github/workflows/requirements.txt
-          python -B src/pipelines/pipeline.py 
+          python -B src/pipeline.py 
   
       - name: 'GCP Auth'
         uses: 'google-github-actions/auth@v0.4.0'
