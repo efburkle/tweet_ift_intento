@@ -7,7 +7,7 @@ from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.svm import SVC
 from .cleaning import *
 from .constants import *
-from .preprocess import * 
+from .preprocess import *
 import os
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "libs/intento-c-enlanube-f5a99ccd5ab3.json"
@@ -26,11 +26,12 @@ df_test["TELECOM"] = 0
 df_train["TELECOM"] = 1
 tweets = pd.concat([df_test, df_train], ignore_index=True)
 
-# Revisa las columnas antes de limpiar
-print(tweets.columns)
+# Imprimir las columnas para identificar el nombre correcto
+print("Columnas disponibles en tweets:", tweets.columns)
 
-# Suponiendo que la columna se llame 'mensaje' (ajusta según corresponda)
-tweets["CLEANED"] = limpieza_total(tweets["mensaje"])
+# Suponiendo que la columna con el texto se llama 'text'
+# Si el nombre real es otro, cámbialo aquí
+tweets["CLEANED"] = limpieza_total(tweets["text"])
 
 def clean_tweets(tweets, min_len=3):
     if 'CLEANED' not in tweets.columns:
@@ -41,23 +42,3 @@ def clean_tweets(tweets, min_len=3):
 
 tweets = clean_tweets(tweets)
 
-X_train, X_test, y_train, y_test = train_test_split(
-    tweets["CLEANED"], tweets["TELECOM"], test_size=0.2, random_state=42
-)
-
-vectorizer = TfidfVectorizer(min_df=10)
-X_train_vec = vectorizer.fit_transform(X_train)
-X_test_vec = vectorizer.transform(X_test)
-
-model = SVC()
-param_grid = {"C": [0.1, 1, 10], "kernel": ["linear", "rbf"]}
-gs_model = GridSearchCV(model, param_grid, cv=5)
-gs_model.fit(X_train_vec, y_train)
-
-print("Mejores parámetros:", gs_model.best_params_)
-y_pred_train = gs_model.predict(X_train_vec)
-y_pred_test = gs_model.predict(X_test_vec)
-print("Reporte de entrenamiento:")
-print(classification_report(y_train, y_pred_train))
-print("Reporte de prueba:")
-print(classification_report(y_test, y_pred_test))
