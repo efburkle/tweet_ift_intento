@@ -56,6 +56,8 @@ def clean_tweets(tweets, min_len=3):
     
     # Filtrar los tweets cuya longitud de palabras sea mayor o igual a min_len
     tweets = tweets[tweets["CLEANED"].str.split().apply(len) >= min_len]
+
+    print(tweets.columns)  # Esto te mostrará todas las columnas disponibles en el DataFrame
     
     return tweets
 
