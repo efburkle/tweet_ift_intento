@@ -5,9 +5,6 @@ import warnings
 
 from sklearn.svm import SVC
 
-
-sys.path.append("code")
-
 warnings.filterwarnings("ignore")
 
 # Importar librerías locales
