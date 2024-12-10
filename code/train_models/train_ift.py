@@ -17,11 +17,14 @@ else:
         "The 'libs' directory does not exist in the specified path."
     )
 
+project_id = "intento-c-enlanube"
+dataset_id = "datos_entrenamiento"
+
 # Importamos modelo a usar
 # Para ver como se llegó a este resultado, ver nb "clasif_telecom.ipynb"
 model = LogisticRegression()
 # Leemos los datos
-tweets = read_sentiment_data(DATA, sentiment_names)
+tweets = read_sentiment_data(project_id,dataset_id, "train" )
 tweets_ift = read_ift_data(DATA + TRAIN_IFT)
 # Limpiamos los datos (código de limpieza en la carpeta libs/train_func.py)
 tweets = clean_tweets(tweets)
