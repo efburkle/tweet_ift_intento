@@ -46,9 +46,17 @@ df_train["TELECOM"] = 1
 tweets = pd.concat([df_test, df_train], ignore_index=True)
 
 # Limpieza de datos
-def clean_tweets(tweets,  min_len=3):
-    tweets['CLEANED'] = tweets['CLEANED'].astype(str)  # Ensure all values are strings
+def clean_tweets(tweets, min_len=3):
+    # Verificar si la columna 'CLEANED' existe en el DataFrame
+    if 'CLEANED' not in tweets.columns:
+        raise ValueError("'CLEANED' column is missing in the DataFrame.")
+    
+    # Asegurarse de que los valores en la columna 'CLEANED' sean cadenas de texto
+    tweets['CLEANED'] = tweets['CLEANED'].astype(str)
+    
+    # Filtrar los tweets cuya longitud de palabras sea mayor o igual a min_len
     tweets = tweets[tweets["CLEANED"].str.split().apply(len) >= min_len]
+    
     return tweets
 
 tweets = clean_tweets(tweets)
