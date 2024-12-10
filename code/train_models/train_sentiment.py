@@ -5,6 +5,9 @@ import warnings
 
 from sklearn.svm import SVC
 
+rint("Current file location:", os.path.abspath(__file__))  # Ruta del archivo actual
+print("Current working directory:", os.getcwd())  # Directorio desde el que se ejecuta el script
+
 warnings.filterwarnings("ignore")
 
 # Importar librerías locales
