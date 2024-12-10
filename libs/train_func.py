@@ -40,16 +40,6 @@ dataset_id = "datos_entrenamiento"
 df_test = read_bigquery_table(project_id, dataset_id, "test")
 df_train = read_bigquery_table(project_id, dataset_id, "train")
 
-print(tweets.columns)
-
-
-def clean_tweets(tweets, min_len=3):
-    if 'CLEANED' not in tweets.columns:
-        raise ValueError("'CLEANED' column is missing in the DataFrame.")
-    tweets['CLEANED'] = tweets['CLEANED'].astype(str)
-    tweets = tweets[tweets["CLEANED"].str.split().apply(len) >= min_len]
-    return tweets
-
 # Leer los datos
 project_id = "intento-c-enlanube"
 dataset_id = "datos_entrenamiento"
@@ -66,6 +56,14 @@ tweets["CLEANED"] = limpieza_total(tweets["TEXT"])
 # Limpiar tweets
 tweets = clean_tweets(tweets)
 
+def clean_tweets(tweets, min_len=3):
+    if 'CLEANED' not in tweets.columns:
+        raise ValueError("'CLEANED' column is missing in the DataFrame.")
+    tweets['CLEANED'] = tweets['CLEANED'].astype(str)
+    tweets = tweets[tweets["CLEANED"].str.split().apply(len) >= min_len]
+    return tweets
+
+print(tweets.columns)
 
 # Separar conjuntos de entrenamiento y prueba
 X_train, X_test, y_train, y_test = train_test_split(
