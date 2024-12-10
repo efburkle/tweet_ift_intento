@@ -8,7 +8,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
- from train_func import pickle, pd, bigquery, TfidfVectorizer, classification_report, GridSearchCV, train_test_split, SVC, limpieza_total, read_bigquery_table, clean_tweets
+from train_func import pickle, pd, bigquery, TfidfVectorizer, classification_report, GridSearchCV, train_test_split, SVC, limpieza_total, read_bigquery_table, clean_tweets
 
 warnings.filterwarnings("ignore")
 
