@@ -14,7 +14,7 @@ warnings.filterwarnings("ignore")
 # Todas las funciones usadas en este código se encuentran en train_func.py en la carpeta libs
 if os.path.isdir(os.path.abspath(os.path.join("libs"))):
     sys.path.append(os.path.abspath(os.path.join("libs")))
-    from train_func import *
+    from train_func import pickle, pd, bigquery, TfidfVectorizer, classification_report, GridSearchCV, train_test_split, SVC, limpieza_total, read_bigquery_table, clean_tweets
 else:
     raise ModuleNotFoundError(
         "The 'libs' directory does not exist in the specified path."
