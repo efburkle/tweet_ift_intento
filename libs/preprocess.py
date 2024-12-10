@@ -10,15 +10,10 @@ def nltk_download():
 
 
 def lemmatize_text(text):
-    """
-    Esta función lematiza un texto.
-
-    Recibe como input un string
-    """
-    lemmatizer = WordNetLemmatizer()
+    if not isinstance(text, str):
+        return ""  # Devuelve una cadena vacía si no es texto
     tokens = word_tokenize(text)
-    return " ".join([lemmatizer.lemmatize(word) for word in tokens])
-
+    return " ".join(tokens)
 
 def stem_text(text):
     """
