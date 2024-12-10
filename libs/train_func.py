@@ -7,7 +7,7 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.svm import SVC
 from libs.cleaning import limpieza_total  # Asegúrate de que esta función esté implementada
-from libs.constants import TELECOM, TWEET, CLEANED, DATA  # Define estas constantes en 'libs/constants.py'
+from libs.constants import TELECOM, TWEET, CLEANED, DATA   # Define estas constantes en 'libs/constants.py'
 
 # Configuración de credenciales para Google Cloud
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "libs/intento-c-enlanube-f5a99ccd5ab3.json"
