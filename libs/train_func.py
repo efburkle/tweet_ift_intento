@@ -40,6 +40,9 @@ dataset_id = "datos_entrenamiento"
 df_test = read_bigquery_table(project_id, dataset_id, "test")
 df_train = read_bigquery_table(project_id, dataset_id, "train")
 
+print(tweets.columns)
+
+
 def clean_tweets(tweets, min_len=3):
     if 'CLEANED' not in tweets.columns:
         raise ValueError("'CLEANED' column is missing in the DataFrame.")
