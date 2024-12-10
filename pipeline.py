@@ -1,5 +1,7 @@
 import sys
 import kfp
+import os
+import sys
 
 sys.path.append("code")
 
@@ -26,9 +28,7 @@ def pipeline(project_id: str, location: str, bq_dataset: str, bq_table: str):
             "The 'libs' directory does not exist in the specified path."
         )
 
-    import os
-import sys
-
+#Lo utilizo para que me respete ..lib.
 libs_path = os.path.abspath(os.path.join("code", "libs"))
 print(f"Looking for 'libs' directory at: {libs_path}")
 
@@ -39,7 +39,7 @@ else:
     raise ModuleNotFoundError(
         f"The 'libs' directory does not exist in the specified path: {libs_path}"
     )
-
+#Fin
     
     data_op = read_bigquery_table(
         project_id=project_id, bq_dataset=bq_dataset, bq_table=bq_table
