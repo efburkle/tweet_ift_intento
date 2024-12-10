@@ -2,7 +2,7 @@ name: CICD
 
 on:
   push:
-    branches: [ branch_final ]
+    branches: [ luis_intenta_2 ]
 
 permissions:
   contents: read
