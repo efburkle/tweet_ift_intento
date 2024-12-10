@@ -7,6 +7,7 @@ from nltk.corpus import stopwords
 from unidecode import unidecode
 
 nltk.download('stopwords')
+nltk.download('punkt_tab')
 
 rid = [
     "las",
