@@ -5,8 +5,6 @@ import warnings
 
 from sklearn.svm import SVC
 
-# from tweet_ift.code.libs.train_func import *
-
 
 warnings.filterwarnings("ignore")
 
