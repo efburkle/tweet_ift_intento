@@ -7,7 +7,7 @@ PIPELINE_NAME = "Tweet-Analysis-Pipeline-v1"
 PIPELINE_ROOT = "gs://tweet_ift_intento/pipeline_root"
 
 
-@kfp.dsl.pipeline(name=PIPELIE_NAME, pipeline_root=PIPELINE_ROOT)
+@kfp.dsl.pipeline(name=PIPELINE_NAME, pipeline_root=PIPELINE_ROOT)
 def pipeline(project_id: str, location: str, bq_dataset: str, bq_table: str):
 #    from tweet_ift_intento.code.libs import train_func
 #    from components.evaluation import choose_best_model
