@@ -19,7 +19,7 @@ def pipeline(project_id: str, location: str, bq_dataset: str, bq_table: str):
     
     if os.path.isdir(os.path.abspath(os.path.join("tweet_ift_intento","code", "train_models"))):
         sys.path.append(os.path.abspath(os.path.join("tweet_ift_intento","code", "train_models")))
-        from train_ift import *
+        from train_ift import read_sentiment_data, read_ift_data, clean_tweets, equal_sample, tokenize_tweets, train_test_split_tweets, train_vectorizer, vectorize_tweets, train_model, eval_model
         from train_sentiment import *
     else:
         raise ModuleNotFoundError(
