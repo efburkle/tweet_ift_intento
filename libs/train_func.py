@@ -5,9 +5,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import classification_report
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.svm import SVC
-from .cleaning import *
-from .constants import *
-from .preprocess import *
+from libs.cleaning import *
+from libs.constants import *
+from libs.preprocess import *
 import os
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "libs/intento-c-enlanube-f5a99ccd5ab3.json"
