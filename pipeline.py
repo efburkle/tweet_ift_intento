@@ -25,6 +25,21 @@ def pipeline(project_id: str, location: str, bq_dataset: str, bq_table: str):
         raise ModuleNotFoundError(
             "The 'libs' directory does not exist in the specified path."
         )
+
+    import os
+import sys
+
+libs_path = os.path.abspath(os.path.join("code", "libs"))
+print(f"Looking for 'libs' directory at: {libs_path}")
+
+if os.path.isdir(libs_path):
+    sys.path.append(libs_path)
+    print("Directory 'libs' found and added to path.")
+else:
+    raise ModuleNotFoundError(
+        f"The 'libs' directory does not exist in the specified path: {libs_path}"
+    )
+
     
     data_op = read_bigquery_table(
         project_id=project_id, bq_dataset=bq_dataset, bq_table=bq_table
