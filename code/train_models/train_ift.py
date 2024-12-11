@@ -22,10 +22,10 @@ else:
 model = LogisticRegression()
 
 # Leemos los datos
-tweets_pos = read_sentiment_data(project_id, dataset_id, "tweet_pos")
-tweets_neg = read_sentiment_data(project_id, dataset_id, "tweets_neg_clean")
-tweets = pd.tweets = pd.concat([tweets_neg, tweets_pos], ignore_index=True)
-tweets_ift = read_ift_data(project_id, dataset_id, "train")
+#tweets_pos = read_sentiment_data(project_id, dataset_id, "tweet_pos")
+#tweets_neg = read_sentiment_data(project_id, dataset_id, "tweets_neg_clean")
+#tweets = pd.tweets = pd.concat([tweets_neg, tweets_pos], ignore_index=True)
+#tweets_ift = read_ift_data(project_id, dataset_id, "train")
 
 # Limpiamos los datos (código de limpieza en la carpeta libs/train_func.py)
 tweets = clean_tweets(tweets)
