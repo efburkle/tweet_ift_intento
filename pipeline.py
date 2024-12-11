@@ -13,7 +13,7 @@ PIPELINE_ROOT = "gs://tweet_ift_intento/pipeline_root"
 
 # Importar módulos necesarios
 from libs.train_func import read_bigquery_table  # Usamos la función para cargar datos desde BigQuery
-from train_models.train_ift import train_ift  # Función para entrenar modelo IFT
+#from train_models.train_ift import train_ift  # Función para entrenar modelo IFT
 from train_models.train_sentiment import train_sentiment  # Función para entrenar modelo de Sentiment
 from register import upload_model  # Registrar modelos entrenados
 
