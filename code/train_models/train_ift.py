@@ -5,10 +5,6 @@ import warnings
 from google.cloud import bigquery
 from sklearn.linear_model import LogisticRegression
 
-# Configuración de credenciales para Google Cloud 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "intento-c-enlanube-f5a99ccd5ab3.json"
-client = bigquery.Client(project="intento-c-enlanube")
-
 warnings.filterwarnings("ignore")
 
 # Importar librerías locales
@@ -20,9 +16,6 @@ else:
     raise ModuleNotFoundError(
         "The 'libs' directory does not exist in the specified path."
     )
-
-project_id = "intento-c-enlanube"
-dataset_id = "datos_entrenamiento"
 
 # Importamos modelo a usar
 # Para ver como se llegó a este resultado, ver nb "clasif_telecom.ipynb"
