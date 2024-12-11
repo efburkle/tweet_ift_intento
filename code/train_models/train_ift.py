@@ -5,7 +5,7 @@ import warnings
 from google.cloud import bigquery
 from sklearn.linear_model import LogisticRegression
 
-# Configuración de credenciales para Google Cloud
+# Configuración de credenciales para Google Cloud 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "intento-c-enlanube-f5a99ccd5ab3.json"
 client = bigquery.Client(project="intento-c-enlanube")
 
